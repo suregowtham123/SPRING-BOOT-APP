@@ -8,6 +8,22 @@ A no-endpoint Spring Boot app that, **on startup**:
    `POST https://bfhldevapigw.healthrx.co.in/hiring/testWebhook/JAVA` using the JWT in the `Authorization` header.
 
 > No controller triggers this — it's done by an `ApplicationRunner` on startup.
+> a) App Startup
+:: Spring Boot ::  (v3.3.3)
+2025-08-29T11:30:02.123  INFO 1056 --- [           main] com.example.hiring.Application           : Starting Application v1.0.0
+2025-08-29T11:30:02.987  INFO 1056 --- [           main] com.example.hiring.StartupRunner         : Starting flow for candidate: John Doe (regNo: REG12348, email: john@example.com)
+
+b) Webhook Generation
+2025-08-29T11:30:04.102  INFO 1056 --- [           main] com.example.hiring.StartupRunner         : Received webhook: https://bfhldevapigw.healthrx.co.in/hiring/webhook/abcd1234
+2025-08-29T11:30:04.105  INFO 1056 --- [           main] com.example.hiring.StartupRunner         : Final SQL prepared (410 chars)
+
+c) Posting SQL to Webhook
+2025-08-29T11:30:05.456  INFO 1056 --- [           main] com.example.hiring.client.WebhookClient  : Submission to https://bfhldevapigw.healthrx.co.in/hiring/webhook/abcd1234 response: {"status":"success","message":"SQL received"}
+2025-08-29T11:30:05.987  INFO 1056 --- [           main] com.example.hiring.client.WebhookClient  : Submission to https://bfhldevapigw.healthrx.co.in/hiring/testWebhook/JAVA response: {"status":"success","message":"SQL validated"}
+
+d) App Exit
+2025-08-29T11:30:06.001  INFO 1056 --- [           main] com.example.hiring.StartupRunner         : Done.
+
 
 ## Final SQL (Question 2: "Younger employees in same department")
 ```sql
