@@ -1,0 +1,15 @@
+app:
+  candidate:
+    name: "John Doe"      # change if needed
+    regNo: "REG12348"     # EVEN -> Question 2
+    email: "john@example.com"
+  # If the API expects Bearer, set bearerPrefix: true
+  bearerPrefix: false
+
+spring:
+  main:
+    web-application-type: reactive
+    banner-mode: console
+logging:
+  level:
+    root: INFO
